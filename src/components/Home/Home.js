@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './Home.css';
 
@@ -9,12 +10,14 @@ class Home extends Component {
     return (
       <div className="home">
 
-          Home Page
+          <Link to='/'>Home</Link>
+          <Link to='/banker'>Banker</Link>
+          <Link to='/teller'>Teller</Link>
+          <Link to='/member'>Member</Link>
 
       </div>
     );
   }
 }
-
 
 export default Home;

@@ -5,7 +5,7 @@ var massive = require('massive');
 var passport = require('passport');
 var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var config = require('./config.js');
+var config = require('../config.js');
 
 const app = module.exports = express();
 
@@ -22,8 +22,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-massive(config.connection)
-.then( db => {
+massive({
+  host: config.host,
+  port: config.port,
+  database: config.database,
+  user: config.user,
+  password: config.password
+}).then( db => {
   app.set('db', db);
 })
 
