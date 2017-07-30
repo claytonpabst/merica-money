@@ -14,7 +14,7 @@ export default (
         <Route component={ Home } path='/' exact />
         <Route component={ Banker } path='/banker' exact />
         <Route component={ Teller } path='/teller' exact />
-        <Route component={ MbrHome } path='/teller' exact />
+        {/*<Route component={ MbrHome } path='/member/home' exact />*/}
 
     </Switch>
 )

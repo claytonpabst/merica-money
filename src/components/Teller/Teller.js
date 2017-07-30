@@ -9,19 +9,44 @@ class Teller extends Component {
         super(props);
 
         this.state = {
-            allMembers: []
+            allMembers: [],
+            firstNames: [],
+            acctInput: '',
+            member: ''
         }
 
         this.getAllMembers = this.getAllMembers.bind(this);
+        this.handleAcctInput = this.handleAcctInput.bind(this);
+        this.getMember = this.getMember.bind(this);
 
     }
 
+    handleAcctInput(e){
+        this.setState({
+            acctInput: e.target.value
+        })
+    }
+
     getAllMembers(){
-        axios.get('/api/Members')
+        axios.get('/api/members')
         .then( res => {
-            console.log(res)
+            let firstNames = []
+            res.data.map((item) => {
+                firstNames.push(item.mbrfirstname)
+            })
+
             this.setState({
-                allMembers: res.data
+                allMembers: res.data,
+                firstNames: firstNames
+            })
+        })
+    }
+
+    getMember(){
+        axios.get(`/api/getMember/${this.state.acctInput}`)
+        .then( res => {
+            this.setState({
+                member: res.data
             })
         })
     }
@@ -29,9 +54,16 @@ class Teller extends Component {
     render() {
         return (
             <div>
-                {this.state.allMembers}       
+                {JSON.stringify(this.state.member)}
+                <br/>
+                {this.state.firstNames.map((name, index) => {
+                    return name
+                })}
+                <br/>   
                 This is the Teller's Page
                 <button onClick={ this.getAllMembers }>Get All Members</button>
+                <input type="text" placeholder='enter acct num' onChange={this.handleAcctInput}/>
+                <button onClick={ this.getMember }>Submit</button>
             </div>
         );
     }

@@ -21,21 +21,16 @@ app.use(bodyParser.json());
 
 // app.use(passport.initialize());
 // app.use(passport.session());
-
-massive({
-  host: config.host,
-  port: config.port,
-  database: config.database,
-  user: config.user,
-  password: config.password
-}).then( db => {
+console.log(config.connection)
+massive(config.connection)
+.then( db => {
   app.set('db', db);
 })
 
 
 app.use(express.static(__dirname + './../build'))
 
-var userController = require("./userController.js");
+// var userController = require("./userController.js");
 
 /////////////Oauth functions
 
@@ -73,13 +68,16 @@ var userController = require("./userController.js");
 // });
 
 //////////Other endpoints for the front end ->
-app.get('/api/Members', function(req, res){
-  db.getAllMembers()
-  .then( allMembers => {
-    return res.status(200).send( allMembers )
-  })
-})
 
-const port = 3000;
+const tellerController = require('./tellerController');
+
+// All Teller Controls
+app.get('/api/members', tellerController.getAllMembers);
+app.get('/api/getMember/:acctInput', tellerController.getMember);
+
+// End of teller cntl
+
+
+const port = 8000;
 // app.listen(config.port, console.log("you are now connected on " + config.port));
 app.listen(port, console.log(`you are now connected on port ${port}`));
