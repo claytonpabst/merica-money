@@ -80,7 +80,7 @@ app.get('/api/getMember/:acctInput', tellerController.getMember);
 const bankerController = require('./bankerController');
 
 //Banker Controls
-app.post('/api/createNewMember/:newMember', bankerController.createNewMember);
+app.post('/api/createNewMember', bankerController.createNewMember);
 //End of Banker controls
 
 
