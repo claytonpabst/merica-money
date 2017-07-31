@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 // app.use(passport.initialize());
 // app.use(passport.session());
-console.log(config.connection)
+
 massive(config.connection)
 .then( db => {
   app.set('db', db);
@@ -76,6 +76,12 @@ app.get('/api/members', tellerController.getAllMembers);
 app.get('/api/getMember/:acctInput', tellerController.getMember);
 
 // End of teller cntl
+
+const bankerController = require('./bankerController');
+
+//Banker Controls
+app.post('/api/createNewMember/:newMember', bankerController.createNewMember);
+//End of Banker controls
 
 
 const port = 8000;
