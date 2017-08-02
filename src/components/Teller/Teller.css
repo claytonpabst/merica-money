@@ -1,0 +1,97 @@
+.tellerMain {
+    height: 100vh;
+    width: 100vw;
+    background: red;
+    position: fixed;
+    /*opacity: .5;*/
+}
+
+.tellerHeader {
+    width: 100vw;
+    height: 25vh;
+    background: #eee;
+    top: 0vh;
+    position: relative;
+    border: 2px solid #0b6efd;
+    box-shadow: inset 0px 0px 9px 4px rgba(11,110,253,0.5);
+}
+
+.logoPicture {
+    position: absolute;
+    height: auto;
+    width: 12%;
+    left: 2%;
+    top: 3%;
+}
+
+.acctInfoParent {
+    height: 100%;
+    width: 55%;
+    /*top: 1%;*/
+    position: absolute;
+    /*border: 2px solid #0b6efd;*/
+    box-shadow: inset 0px 0px 9px 4px rgba(11,110,253,0.5);    
+    left: 15%;
+    border-left: 2px solid #0b6efd;
+}
+
+.memberStaticInfo {
+    height: 100%;
+    width: 30%;
+    /*top: 1%;*/
+    position: absolute;
+    /*border: 2px solid #0b6efd;*/
+    box-shadow: inset 0px 0px 9px 4px rgba(11,110,253,0.5);    
+    left: 70%;
+    border-left: 2px solid #0b6efd;
+}
+
+.tellerSideNav {
+    width: 18vw;
+    height: 75vh;
+    background: #eee;
+    top: 25vh;
+    border: 2px solid #0b6efd;
+    box-shadow: inset 0px 0px 9px 4px rgba(11,110,253,0.5);    
+    /*opacity: .5;*/
+}
+
+.tellerContentMain {
+    width: 82vw;
+    height: 75vh;
+    background: #eee;
+    position: absolute;
+    right: 0vw;
+    bottom: 0vh;
+    border: 2px solid #0b6efd;
+    box-shadow: inset 0px 0px 9px 4px rgba(11,110,253,0.5);    
+}
+
+.tellerContentInner {
+    position: absolute;
+    left: 23%;
+    top: 15%;
+    height: 70%;
+    width: 50%;
+    background: #d5d5d5;
+    box-shadow: inset 0px 0px 66px 6px rgba(0,0,0,0.38), 0px 0px 20px 12px rgba(0,0,0,0.46);
+    /*box-shadow: inset 0px 0px 66px 6px rgba(0,0,0,0.38), 0px 0px 20px 12px rgba(0,0,0,0.46);*/
+    /*box-shadow: 0px 0px 66px 6px rgba(0,0,0,0.38);*/
+}
+
+.tellerToolsWords {
+    position: absolute;
+    height: 100%;
+    width: 80px;
+    word-wrap: break-word;
+    font-family: monospace;
+    /*background: lightblue;   */
+    right: 0px;
+    font-size: 80px;
+    line-height: 55px;
+    font-weight: bolder;
+    border: 2px solid #0b6efd;
+    color: #0b6efd;
+    padding-top: 10px;
+    box-shadow: inset 0px 0px 9px 4px rgba(11,110,253,0.5), 0px 0px 9px 4px rgba(11,110,253,0.5);    
+}
