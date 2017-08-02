@@ -56,6 +56,7 @@ class Teller extends Component {
             this.setState({
                 membersAccounts: res.data
             })
+        console.log(res.data)
         })
     }
 

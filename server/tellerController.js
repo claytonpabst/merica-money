@@ -24,6 +24,7 @@ module.exports = {
         const db = req.app.get('db');
         db.getMembersAccounts([req.params.acctInput])
         .then( member => {
+            console.log(member)
             return res.status(200).send( member )
         })
     } 

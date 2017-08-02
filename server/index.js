@@ -74,7 +74,7 @@ const tellerController = require('./tellerController');
 // All Teller Controls
 app.get('/api/members', tellerController.getAllMembers);
 app.get('/api/getMember/:acctInput', tellerController.getMember);
-app.get('api/getMembersAccounts/:acctInput', tellerController.getMembersAccounts);
+app.get('/api/getMembersAccounts/:acctInput', tellerController.getMembersAccounts);
 
 // End of teller cntl
 
