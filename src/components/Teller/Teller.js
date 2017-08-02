@@ -113,7 +113,10 @@ class Teller extends Component {
                         <h2>Account Number:{this.state.member.acctnum}</h2>
                     </div>
                 </header>
-                <header className='tellerSideNav'></header>
+                <header className='tellerSideNav'>
+                    <div className='sideNavOptions'>Search For Account</div>
+                    <div className='sideNavOptions'>Transactions</div>
+                </header>
                 <div className='tellerContentMain'>
                     <div className='tellerContentInner'>
                         {/*{JSON.stringify(this.state.member)}*/}
