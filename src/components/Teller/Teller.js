@@ -57,7 +57,7 @@ class Teller extends Component {
             this.setState({
                 member: res.data[0]
             })
-        console.log(this.state.member)
+        // console.log(this.state.member)
         })
         axios.get(`/api/getMembersAccounts/${this.state.acctInput}`)
         .then( res => {
@@ -72,8 +72,8 @@ class Teller extends Component {
                 checkingAvailableBalance: res.data[1].availablebalance,
                 checkingDateOpened: res.data[1].opendate
             })
-        console.log(res.data)
-        console.log(this.state)
+        // console.log(res.data)
+        // console.log(this.state)
         })
     }
 
@@ -116,6 +116,9 @@ class Teller extends Component {
                 <header className='tellerSideNav'>
                     <div className='sideNavOptions'>Search For Account</div>
                     <div className='sideNavOptions'>Transactions</div>
+                    <div className='sideNavOptions'>Create New Account</div>
+                    <div className='sideNavOptions'>Delete Account</div>
+                    <div className='sideNavOptions'>End Session</div>
                 </header>
                 <div className='tellerContentMain'>
                     <div className='tellerContentInner'>

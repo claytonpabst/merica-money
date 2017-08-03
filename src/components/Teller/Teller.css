@@ -62,8 +62,31 @@
     background: #eee;
     top: 25vh;
     border: 2px solid #0b6efd;
-    box-shadow: inset 0px 0px 9px 4px rgba(11,110,253,0.5);    
+    box-shadow: inset 0px 0px 9px 4px rgba(11,110,253,0.5);  
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
     /*opacity: .5;*/
+}
+
+.sideNavOptions {
+    width: 90%;
+    height: 10%;
+    box-shadow: inset 15px -10px 35px 7px rgba(96,96,97,1);
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-weight: bolder;
+    font-size: 18px;
+    transition: .3s;
+}
+
+.sideNavOptions:hover {
+    opacity: .5;
+    background: #aaa;
 }
 
 .tellerContentMain {
