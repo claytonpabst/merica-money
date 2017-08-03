@@ -4,6 +4,12 @@ import axios from 'axios';
 
 import './Teller.css';
 
+import SearchForAccount from './Forms/SearchForAccount'
+import transactions from './Forms/Transactions'
+import CreateNewAccount from './Forms/CreateNewAccount'
+import DeleteAccount from './Forms/DeleteAccount'
+import EndSession from './Forms/EndSession'
+
 class Teller extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +27,8 @@ class Teller extends Component {
             checkingAccountType: undefined,
             checkingBalance: undefined,
             checkingAvailableBalance: undefined,
-            checkingDateOpened: undefined
+            checkingDateOpened: undefined,
+            currentContentForm: 1
         }
 
         this.getAllMembers = this.getAllMembers.bind(this);
@@ -66,11 +73,11 @@ class Teller extends Component {
                 savingsOneAccountType: res.data[0].accounttype,
                 savingsOneBalance: res.data[0].balance,
                 savingsOneAvailableBalance: res.data[0].availablebalance,
-                savingsOneDateOpened: res.data[0].opendate,
+                savingsOneDateOpened: res.data[0].opendate.substring(0, 10),
                 checkingAccountType: res.data[1].accounttype,
                 checkingBalance: res.data[1].balance,
                 checkingAvailableBalance: res.data[1].availablebalance,
-                checkingDateOpened: res.data[1].opendate
+                checkingDateOpened: res.data[1].opendate.substring(0, 10)
             })
         // console.log(res.data)
         // console.log(this.state)
@@ -78,6 +85,12 @@ class Teller extends Component {
     }
 
     render() {
+
+        let contentFormToShow;
+        if (this.state.currentContentForm === 1) {
+            contentFormToShow = <SearchForAccount />
+        }
+
         return (
             <section className='tellerMain'>
                 <header className='tellerHeader'>
@@ -122,16 +135,17 @@ class Teller extends Component {
                 </header>
                 <div className='tellerContentMain'>
                     <div className='tellerContentInner'>
+                        { contentFormToShow }
                         {/*{JSON.stringify(this.state.member)}*/}
-                        <br/>
+                        {/*<br/>*/}
                         {/*{this.state.firstNames.map((name, index) => {
                             return name
                         })}*/}
-                        Search account number
-                        <br/>   
+                        {/*Search account number*/}
+                        {/*<br/>   */}
                         {/*<button onClick={ this.getAllMembers }>Get All Members</button>*/}
-                        <input type="text" placeholder='enter acct num' onChange={this.handleAcctInput}/>
-                        <button onClick={ this.getMember }>Submit</button>
+                        {/*<input type="text" placeholder='enter acct num' onChange={this.handleAcctInput}/>*/}
+                        {/*<button onClick={ this.getMember }>Submit</button>*/}
                     </div>
                     <header className='tellerToolsWords'>TELLER-TOOLS</header>
                 </div>
