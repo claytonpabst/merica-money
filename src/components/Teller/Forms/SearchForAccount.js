@@ -10,6 +10,10 @@ class SearchForAccount extends Component {
         //bind stuff here
     }
 
+    getMemberByLastName(){
+        
+    }
+
     render() {
         return (
             <section>
@@ -18,11 +22,20 @@ class SearchForAccount extends Component {
                 {/*{this.state.firstNames.map((name, index) => {
                     return name
                 })}*/}
-                Search account number
-                {/*<br/>   */}
+                Search Account Number
+                <br/>   
                 {/*<button onClick={ this.getAllMembers }>Get All Members</button>*/}
-                {/*<input type="text" placeholder='enter acct num' onChange={this.handleAcctInput}/>*/}
-                {/*<button onClick={ this.getMember }>Submit</button>*/}
+                <input type="text" placeholder='enter acct number' onChange={this.props.handleAcctInput}/>
+                <button onClick={ this.props.getMember }>Submit</button>
+                <br/>
+                <br/>
+                Search Last Name
+                <br/>
+                <input type="text" placeholder='enter last name' onChange={this.props.handleLastNameInput}/>
+                <button onClick={ this.getMemberByLastName }>Submit</button>
+                <div className="searchForAccountLastNameResults">
+                
+                </div>
             </section>
         )
     }

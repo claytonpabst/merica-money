@@ -18,6 +18,7 @@ class Teller extends Component {
             allMembers: [],
             firstNames: [],
             acctInput: '',
+            lastNameInput: '',
             member: '',
             membersAccounts: [],
             savingsOneAccountType: undefined,
@@ -40,6 +41,12 @@ class Teller extends Component {
     handleAcctInput(e){
         this.setState({
             acctInput: e.target.value
+        })
+    }
+
+    handleLastNameInput(e){
+        this.setState({
+            lastNameInput: e.target.value
         })
     }
 
@@ -88,7 +95,11 @@ class Teller extends Component {
 
         let contentFormToShow;
         if (this.state.currentContentForm === 1) {
-            contentFormToShow = <SearchForAccount />
+            contentFormToShow = <SearchForAccount getMember={this.getMember} 
+                                                  handleAcctInput={this.handleAcctInput} 
+                                                  handleLastNameInput={this.handleLastNameInput}
+                                                  pushMemberByLastName={this.getMemberByLastName}
+                                                  />
         }
 
         return (
@@ -96,6 +107,9 @@ class Teller extends Component {
                 <header className='tellerHeader'>
                     <img src="img/logoGrey.jpg" className='logoPicture'/>
                     <div className='acctInfoParent'>
+                        {/*< thisIsTheInfoComponent savingsOneAccountType={this.state.savingsOneAccountType}
+                                                savingsOneBalance={this.state.savingsOneBalance}
+                                                >*/}
                         {/*<h1>{JSON.stringify(this.state.membersAccounts)}</h1>*/}
                         <table className="accountsTable">
                             <tbody>
@@ -121,9 +135,9 @@ class Teller extends Component {
                         </table>                                              
                     </div>
                     <div className='memberStaticInfo'>
-                        <h2>Member:{this.state.member.mbrfirstname} {this.state.member.mbrmiddlename} {this.state.member.mbrlastname}</h2>
+                        <h2>Member: {this.state.member.mbrfirstname} {this.state.member.mbrmiddlename} {this.state.member.mbrlastname}</h2>
                         <br/>
-                        <h2>Account Number:{this.state.member.acctnum}</h2>
+                        <h2>Account Number: {this.state.member.acctnum}</h2>
                     </div>
                 </header>
                 <header className='tellerSideNav'>
