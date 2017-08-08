@@ -5,24 +5,30 @@ class SearchForAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lastNameSearchResults: []
+            lastNameSearchResults: [],
+            searchList: ''
         }
         this.getMemberByLastName = this.getMemberByLastName.bind(this)
         //bind stuff here
     }
 
     getMemberByLastName(){
-        console.log(this.props.lastNameInput)
         axios.get(`/api/getMemberByLastName/${this.props.lastNameInput}`)
         .then( res => {
             this.setState({
                 lastNameSearchResults: res.data
             })
-            console.log(res.data)
         })        
     }
 
     render() {
+
+        let searchList = 'Search Results:'
+        if(this.state.lastNameSearchResults.length > 0) {
+            searchList = this.state.lastNameSearchResults[0].acctnum
+        }
+
+
         return (
             <section>
                 {/*{JSON.stringify(this.state.member)}*/}
@@ -40,8 +46,26 @@ class SearchForAccount extends Component {
                 <br/>
                 <input type="text" placeholder='enter last name' onChange={this.props.handleLastNameInput}/>
                 <button onClick={ this.getMemberByLastName }>Submit</button>
-                <div className="searchForAccountLastNameResults">
-                    {JSON.stringify(this.state.lastNameSearchResults)}
+                <div className="searchForAccountLastNameResults" >
+                    <ul className='searchForAccountLastNameResultsHeader'>
+                        <li className='lineOfThree'>Member:</li>
+                        <li className='lineOfThree'>Account:</li>
+                        <li className='lineOfThree'>Member SSN:</li>
+                    </ul>
+                    {this.state.lastNameSearchResults.map((member, i) =>{
+                        return  <div>
+                                    <p value={member.acctnum} 
+                                        onClick={() => this.props.getMember(member.acctnum)}
+                                        className='searchForAccountLastNameResultsList'
+                                        >
+                                            <li className='lineOfThree'>{member.mbrfirstname + ' ' + member.mbrlastname}</li>
+                                            <li className='lineOfThree'>{member.acctnum}</li>
+                                            <li className='lineOfThree'>{member.mbrssn}</li>
+                                    </p>
+
+                                </div>
+                    })}
+                    {/*{ searchList }*/}
                 </div>
             </section>
         )

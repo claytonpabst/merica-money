@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Teller.css';
 
 import SearchForAccount from './Forms/SearchForAccount'
-import transactions from './Forms/Transactions'
+import Transactions from './Forms/Transactions'
 import CreateNewAccount from './Forms/CreateNewAccount'
 import DeleteAccount from './Forms/DeleteAccount'
 import EndSession from './Forms/EndSession'
@@ -36,6 +36,7 @@ class Teller extends Component {
         this.handleAcctInput = this.handleAcctInput.bind(this);
         this.getMember = this.getMember.bind(this);
         this.handleLastNameInput = this.handleLastNameInput.bind(this);
+        this.changeTellerForm = this.changeTellerForm.bind(this);
 
     }
 
@@ -66,15 +67,18 @@ class Teller extends Component {
         })
     }
 
-    getMember(){
-        axios.get(`/api/getMember/${this.state.acctInput}`)
+    getMember(mem){
+        console.log(typeof mem)
+        const num = typeof mem === 'number' ? mem : this.state.acctInput
+        console.log(num)
+        axios.get(`/api/getMember/${num}`)
         .then( res => {
             this.setState({
                 member: res.data[0]
             })
         // console.log(this.state.member)
         })
-        axios.get(`/api/getMembersAccounts/${this.state.acctInput}`)
+        axios.get(`/api/getMembersAccounts/${num}`)
         .then( res => {
             this.setState({
                 membersAccounts: res.data,
@@ -92,6 +96,12 @@ class Teller extends Component {
         })
     }
 
+    changeTellerForm(form) {
+        this.setState({
+            currentContentForm: form
+        })
+    }
+
     render() {
 
         let contentFormToShow;
@@ -102,6 +112,8 @@ class Teller extends Component {
                                                   pushMemberByLastName={this.pushMemberByLastName}
                                                   lastNameInput={this.state.lastNameInput}
                                                   />
+        } else if (this.state.currentContentForm === 2) {
+            contentFormToShow = <Transactions />
         }
 
         return (
@@ -143,11 +155,11 @@ class Teller extends Component {
                     </div>
                 </header>
                 <header className='tellerSideNav'>
-                    <div className='sideNavOptions'>Search For Account</div>
-                    <div className='sideNavOptions'>Transactions</div>
-                    <div className='sideNavOptions'>Create New Account</div>
-                    <div className='sideNavOptions'>Delete Account</div>
-                    <div className='sideNavOptions'>End Session</div>
+                    <div className='sideNavOptions' onClick={this.changeTellerForm(1)}>Search For Account</div>
+                    <div className='sideNavOptions' onClick={this.changeTellerForm(2)}>Transactions</div>
+                    <div className='sideNavOptions' onClick={this.changeTellerForm(3)}>Create New Account</div>
+                    <div className='sideNavOptions' onClick={this.changeTellerForm(4)}>Delete Account</div>
+                    <div className='sideNavOptions' onClick={this.changeTellerForm(5)}>End Session</div>
                 </header>
                 <div className='tellerContentMain'>
                     <div className='tellerContentInner'>
