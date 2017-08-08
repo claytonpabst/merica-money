@@ -25,16 +25,17 @@ class Teller extends Component {
             savingsOneBalance: undefined,
             savingsOneAvailableBalance: undefined,
             savingsOneDateOpened: undefined,
-            checkingAccountType: undefined,
-            checkingBalance: undefined,
-            checkingAvailableBalance: undefined,
-            checkingDateOpened: undefined,
+            checkingAccountType: '',
+            checkingBalance: '',
+            checkingAvailableBalance: '',
+            checkingDateOpened: '',
             currentContentForm: 1
         }
 
         this.getAllMembers = this.getAllMembers.bind(this);
         this.handleAcctInput = this.handleAcctInput.bind(this);
         this.getMember = this.getMember.bind(this);
+        this.handleLastNameInput = this.handleLastNameInput.bind(this);
 
     }
 
@@ -98,7 +99,8 @@ class Teller extends Component {
             contentFormToShow = <SearchForAccount getMember={this.getMember} 
                                                   handleAcctInput={this.handleAcctInput} 
                                                   handleLastNameInput={this.handleLastNameInput}
-                                                  pushMemberByLastName={this.getMemberByLastName}
+                                                  pushMemberByLastName={this.pushMemberByLastName}
+                                                  lastNameInput={this.state.lastNameInput}
                                                   />
         }
 

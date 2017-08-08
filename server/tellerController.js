@@ -27,7 +27,16 @@ module.exports = {
             console.log(member)
             return res.status(200).send( member )
         })
-    } 
+    },
+
+    getMemberByLastName: function(req, res){
+        const db = req.app.get('db');
+        db.getMemberByLastName([`%${req.params.lastNameInput}%`])
+        .then( searchResults => {
+            console.log( searchResults )
+            return res.status(200).send( searchResults )
+        })
+    }
     
   
 }

@@ -5,13 +5,21 @@ class SearchForAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            lastNameSearchResults: []
         }
+        this.getMemberByLastName = this.getMemberByLastName.bind(this)
         //bind stuff here
     }
 
     getMemberByLastName(){
-        
+        console.log(this.props.lastNameInput)
+        axios.get(`/api/getMemberByLastName/${this.props.lastNameInput}`)
+        .then( res => {
+            this.setState({
+                lastNameSearchResults: res.data
+            })
+            console.log(res.data)
+        })        
     }
 
     render() {
@@ -24,7 +32,6 @@ class SearchForAccount extends Component {
                 })}*/}
                 Search Account Number
                 <br/>   
-                {/*<button onClick={ this.getAllMembers }>Get All Members</button>*/}
                 <input type="text" placeholder='enter acct number' onChange={this.props.handleAcctInput}/>
                 <button onClick={ this.props.getMember }>Submit</button>
                 <br/>
@@ -34,7 +41,7 @@ class SearchForAccount extends Component {
                 <input type="text" placeholder='enter last name' onChange={this.props.handleLastNameInput}/>
                 <button onClick={ this.getMemberByLastName }>Submit</button>
                 <div className="searchForAccountLastNameResults">
-                
+                    {JSON.stringify(this.state.lastNameSearchResults)}
                 </div>
             </section>
         )
