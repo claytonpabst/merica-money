@@ -21,10 +21,10 @@ class Teller extends Component {
             lastNameInput: '',
             member: '',
             membersAccounts: [],
-            savingsOneAccountType: undefined,
-            savingsOneBalance: undefined,
-            savingsOneAvailableBalance: undefined,
-            savingsOneDateOpened: undefined,
+            savingsOneAccountType: null,
+            savingsOneBalance: null,
+            savingsOneAvailableBalance: null,
+            savingsOneDateOpened: null,
             checkingAccountType: '',
             checkingBalance: '',
             checkingAvailableBalance: '',
@@ -113,10 +113,10 @@ class Teller extends Component {
             lastNameInput: '',
             member: '',
             membersAccounts: [],
-            savingsOneAccountType: undefined,
-            savingsOneBalance: undefined,
-            savingsOneAvailableBalance: undefined,
-            savingsOneDateOpened: undefined,
+            savingsOneAccountType: null,
+            savingsOneBalance: null,
+            savingsOneAvailableBalance: null,
+            savingsOneDateOpened: null,
             checkingAccountType: '',
             checkingBalance: '',
             checkingAvailableBalance: '',
@@ -125,8 +125,11 @@ class Teller extends Component {
         })
     }
 
-    deposit() {
-
+    deposit(amountInput) {
+        this.setState({
+            savingsOneBalance: this.state.savingsOneBalance + amountInput
+        })
+        console.log(this.state)
     }
 
     render() {

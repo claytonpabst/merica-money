@@ -36,6 +36,7 @@ class SearchForAccount extends Component {
                 {/*{this.state.firstNames.map((name, index) => {
                     return name
                 })}*/}
+                <br/>   
                 Search Account Number
                 <br/>   
                 <input type="text" placeholder='enter acct number' onChange={this.props.handleAcctInput}/>
@@ -53,7 +54,7 @@ class SearchForAccount extends Component {
                         <li className='lineOfThree'>Member SSN:</li>
                     </ul>
                     {this.state.lastNameSearchResults.map((member, i) =>{
-                        return  <div>
+                        return  <div key={i}>
                                     <p value={member.acctnum} 
                                         onClick={() => this.props.getMember(member.acctnum)}
                                         className='searchForAccountLastNameResultsList'
