@@ -38,6 +38,7 @@ class Teller extends Component {
         this.handleLastNameInput = this.handleLastNameInput.bind(this);
         this.changeTellerForm = this.changeTellerForm.bind(this);
         this.endSession = this.endSession.bind(this);
+        this.deposit = this.deposit.bind(this);
 
     }
 
@@ -124,6 +125,10 @@ class Teller extends Component {
         })
     }
 
+    deposit() {
+
+    }
+
     render() {
 
         let contentFormToShow;
@@ -135,7 +140,7 @@ class Teller extends Component {
                                                   lastNameInput={this.state.lastNameInput}
                                                   />
         } else if (this.state.currentContentForm === 2) {
-            contentFormToShow = <Transactions />
+            contentFormToShow = <Transactions deposit={this.deposit}/>
         } else if (this.state.currentContentForm === 3) {
             contentFormToShow = <TransactionHistory />
         } else if (this.state.currentContentForm === 4) {
