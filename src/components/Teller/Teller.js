@@ -6,7 +6,7 @@ import './Teller.css';
 
 import SearchForAccount from './Forms/SearchForAccount'
 import Transactions from './Forms/Transactions'
-import CreateNewAccount from './Forms/CreateNewAccount'
+import TransactionHistory from './Forms/TransactionHistory'
 import DeleteAccount from './Forms/DeleteAccount'
 import EndSession from './Forms/EndSession'
 
@@ -37,6 +37,7 @@ class Teller extends Component {
         this.getMember = this.getMember.bind(this);
         this.handleLastNameInput = this.handleLastNameInput.bind(this);
         this.changeTellerForm = this.changeTellerForm.bind(this);
+        this.endSession = this.endSession.bind(this);
 
     }
 
@@ -74,7 +75,8 @@ class Teller extends Component {
         axios.get(`/api/getMember/${num}`)
         .then( res => {
             this.setState({
-                member: res.data[0]
+                member: res.data[0],
+                currentContentForm: 2
             })
         // console.log(this.state.member)
         })
@@ -102,6 +104,26 @@ class Teller extends Component {
         })
     }
 
+    endSession() {
+        this.setState({
+            allMembers: [],
+            firstNames: [],
+            acctInput: '',
+            lastNameInput: '',
+            member: '',
+            membersAccounts: [],
+            savingsOneAccountType: undefined,
+            savingsOneBalance: undefined,
+            savingsOneAvailableBalance: undefined,
+            savingsOneDateOpened: undefined,
+            checkingAccountType: '',
+            checkingBalance: '',
+            checkingAvailableBalance: '',
+            checkingDateOpened: '',
+            currentContentForm: 1           
+        })
+    }
+
     render() {
 
         let contentFormToShow;
@@ -114,6 +136,12 @@ class Teller extends Component {
                                                   />
         } else if (this.state.currentContentForm === 2) {
             contentFormToShow = <Transactions />
+        } else if (this.state.currentContentForm === 3) {
+            contentFormToShow = <TransactionHistory />
+        } else if (this.state.currentContentForm === 4) {
+            contentFormToShow = <DeleteAccount />
+        } else if (this.state.currentContentForm === 5) {
+            contentFormToShow = <EndSession endSession={this.endSession}/>
         }
 
         return (
@@ -155,11 +183,11 @@ class Teller extends Component {
                     </div>
                 </header>
                 <header className='tellerSideNav'>
-                    <div className='sideNavOptions' onClick={this.changeTellerForm(1)}>Search For Account</div>
-                    <div className='sideNavOptions' onClick={this.changeTellerForm(2)}>Transactions</div>
-                    <div className='sideNavOptions' onClick={this.changeTellerForm(3)}>Create New Account</div>
-                    <div className='sideNavOptions' onClick={this.changeTellerForm(4)}>Delete Account</div>
-                    <div className='sideNavOptions' onClick={this.changeTellerForm(5)}>End Session</div>
+                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(1)}>Search For Account</div>
+                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(2)}>Transactions</div>
+                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(3)}>Transaction History</div>
+                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(4)}>Delete Account</div>
+                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(5)}>End Session</div>
                 </header>
                 <div className='tellerContentMain'>
                     <div className='tellerContentInner'>
