@@ -38,18 +38,20 @@ module.exports = {
         })
     },
     
-    deposit: function(req, res){
+    deposit: function(req, res, next){
         const db = req.app.get('db');
-        let sum = req.body.depositAmount + req.body.balance;
-        // let balance = 0
-        // db.getBalance([req.params.accountNumber])
-        // .then( bal => {
-        //     balance = bal + req.body.depositAmount;
-        // })
-        db.depositStepOne([req.params.accountNumber, sum])
-        .then ( results => {
-            console.log(results);
-            return res.status(200).send( results )
+        // let sum = req.body.depositAmount + req.body.balance;
+        let balance = 0.00
+        db.getBalance([req.params.accountNumber])
+        .then( bal => {
+            if ( bal.length ) {
+                balance = bal + req.body.depositAmount;
+                db.deposit([req.params.accountNumber, balance])
+                .then ( results => {
+                    console.log(results);
+                    return res.status(200).send( results )
+                })
+            }
         })
     }
 

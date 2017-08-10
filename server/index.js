@@ -77,7 +77,7 @@ app.get('/api/getMember/:acctInput', tellerController.getMember);
 app.get('/api/getMembersAccounts/:acctInput', tellerController.getMembersAccounts);
 app.get('/api/getMemberByLastName/:lastNameInput', tellerController.getMemberByLastName);
 
-app.put('/api/depositStepOne/:accountNumber', tellerController.deposit);
+app.put('/api/deposit/:accountNumber', tellerController.deposit);
 // End of teller cntl
 
 const bankerController = require('./bankerController');

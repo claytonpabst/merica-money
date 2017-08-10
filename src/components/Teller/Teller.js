@@ -75,25 +75,31 @@ class Teller extends Component {
         console.log(num)
         axios.get(`/api/getMember/${num}`)
         .then( res => {
-            this.setState({
-                member: res.data[0],
-                currentContentForm: 2
-            })
+            if (res.length) {
+                this.setState({
+                    member: res.data[0],
+                    currentContentForm: 2
+                })
+            }
         // console.log(this.state.member)
         })
         axios.get(`/api/getMembersAccounts/${num}`)
         .then( res => {
-            this.setState({
-                membersAccounts: res.data,
-                savingsOneAccountType: res.data[0].accounttype,
-                savingsOneBalance: res.data[0].balance,
-                savingsOneAvailableBalance: res.data[0].availablebalance,
-                savingsOneDateOpened: res.data[0].opendate.substring(0, 10),
-                checkingAccountType: res.data[1].accounttype,
-                checkingBalance: res.data[1].balance,
-                checkingAvailableBalance: res.data[1].availablebalance,
-                checkingDateOpened: res.data[1].opendate.substring(0, 10)
-            })
+            if (res.length) {
+                this.setState({
+                    membersAccounts: res.data,
+                    savingsOneAccountType: res.data[0].accounttype,
+                    savingsOneBalance: res.data[0].balance,
+                    savingsOneAvailableBalance: res.data[0].availablebalance,
+                    savingsOneDateOpened: res.data[0].opendate.substring(0, 10),
+                    checkingAccountType: res.data[1].accounttype,
+                    checkingBalance: res.data[1].balance,
+                    checkingAvailableBalance: res.data[1].availablebalance,
+                    checkingDateOpened: res.data[1].opendate.substring(0, 10)
+                })
+            } else {
+                return alert('No member found by that account number, try searching by last name.')
+            }
         // console.log(res.data)
         // console.log(this.state)
         })
@@ -101,7 +107,7 @@ class Teller extends Component {
 
     deposit(amountInput) {
         //this.state.member.acctnum is coming in on req.params... the object is coming in on req.body
-        axios.put(`/api/depositStepOne/${this.state.member.acctnum}`, {depositAmount: amountInput, balance: this.state.savingsOneBalance})
+        axios.put(`/api/deposit/${this.state.member.acctnum}`, {depositAmount: amountInput})
         // this.setState({
         //     savingsOneBalance: this.state.savingsOneBalance + amountInput
         // })
