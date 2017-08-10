@@ -20,9 +20,18 @@ module.exports = {
         })
     },
 
-    getMembersAccounts: function(req, res){
+    getMembersAccountSavings1: function(req, res){
         const db = req.app.get('db');
-        db.getMembersAccounts([req.params.acctInput])
+        db.getMembersAccountSavings1([req.params.acctInput])
+        .then( member => {
+            console.log(member)
+            return res.status(200).send( member )
+        })
+    },
+
+    getMembersAccountChecking: function(req, res){
+        const db = req.app.get('db');
+        db.getMembersAccountChecking([req.params.acctInput])
         .then( member => {
             console.log(member)
             return res.status(200).send( member )

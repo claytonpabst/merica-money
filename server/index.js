@@ -74,7 +74,8 @@ const tellerController = require('./tellerController');
 // All Teller Controls
 app.get('/api/members', tellerController.getAllMembers);
 app.get('/api/getMember/:acctInput', tellerController.getMember);
-app.get('/api/getMembersAccounts/:acctInput', tellerController.getMembersAccounts);
+app.get('/api/getMembersAccountSavings1/:acctInput', tellerController.getMembersAccountSavings1);
+app.get('/api/getMembersAccountChecking/:acctInput', tellerController.getMembersAccountChecking);
 app.get('/api/getMemberByLastName/:lastNameInput', tellerController.getMemberByLastName);
 
 app.put('/api/deposit/:accountNumber', tellerController.deposit);

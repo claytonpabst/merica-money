@@ -86,8 +86,20 @@ class Teller extends Component {
             }
         // console.log(this.state.member)
         })
-    
-        axios.get(`/api/getMembersAccounts/${num}`)
+        
+        axios.get(`/api/getMembersAccountChecking/${num}`)
+        .then( res => {
+            if (res.data.length) {
+                this.setState({
+                    checkingAccountType: res.data[0].accounttype,
+                    checkingBalance: res.data[0].balance,
+                    checkingAvailableBalance: res.data[0].availablebalance,
+                    checkingDateOpened: res.data[0].opendate.substring(0, 10)
+                })
+            }
+        })
+
+        axios.get(`/api/getMembersAccountSavings1/${num}`)
         .then( res => {
             // console.log(res)
             if (res.data.length) {
@@ -97,10 +109,6 @@ class Teller extends Component {
                     savingsOneBalance: res.data[0].balance,
                     savingsOneAvailableBalance: res.data[0].availablebalance,
                     savingsOneDateOpened: res.data[0].opendate.substring(0, 10),
-                    checkingAccountType: res.data[1].accounttype,
-                    checkingBalance: res.data[1].balance,
-                    checkingAvailableBalance: res.data[1].availablebalance,
-                    checkingDateOpened: res.data[1].opendate.substring(0, 10)
                 })
             } else {
                 return alert('No member found by that account number, try searching by last name.')
@@ -177,7 +185,7 @@ class Teller extends Component {
                                                 savingsOneBalance={this.state.savingsOneBalance}
                                                 >*/}
                         {/*<h1>{JSON.stringify(this.state.membersAccounts)}</h1>*/}
-                        {this.state.savingsOneAccountType}
+                        {/*{this.state.savingsOneAccountType}*/}
                         <table className="accountsTable">
                             <tbody>
                                 <tr className="accountsRowOne">
