@@ -13,9 +13,9 @@ class Transactions extends Component {
 
     handleAmountInput(e) {
         this.setState ({
-            amountInput: parseInt(e.target.value)
+            amountInput: parseFloat(e.target.value)
         })
-        console.log(this.state.amountInput)
+        // console.log(this.state.amountInput)
     }
 
     render() {
@@ -28,7 +28,7 @@ class Transactions extends Component {
                 <select name="transactionType" id='transactionType'>
                     <option value="deposit">Deposit</option>
                     <option value="withdrawal">Withdrawal</option>
-                    <option value="transfer">Transfer</option>
+                    {/*<option value="transfer">Transfer</option>*/}
                 </select>
 
                 <br/>

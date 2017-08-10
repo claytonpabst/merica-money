@@ -36,7 +36,40 @@ module.exports = {
             console.log( searchResults )
             return res.status(200).send( searchResults )
         })
-    }
+    },
     
+    deposit: function(req, res){
+        const db = req.app.get('db');
+        let sum = req.body.depositAmount + req.body.balance;
+        // let balance = 0
+        // db.getBalance([req.params.accountNumber])
+        // .then( bal => {
+        //     balance = bal + req.body.depositAmount;
+        // })
+        db.depositStepOne([req.params.accountNumber, sum])
+        .then ( results => {
+            console.log(results);
+            return res.status(200).send( results )
+        })
+    }
+
+    // deposit: function(req, res){
+    //     const db = req.app.get('db');
+    //     let balance = 0
+    //     // let final = null
+    //     db.getBalance([req.params.accountNumber])
+    //     .then( bal => {
+    //         db.depositStepOne([req.params.accountNumber, bal + req.body.depositAmount])
+    //         .then(results => {
+    //             console.log(results);
+    //             return res.status(200).send( results );
+    //         })
+    //     })
+        // db.depositStepOne([req.params.accountNumber, balance])
+        // .then ( results => {
+        //     console.log(results);
+        //     return res.status(200).send( results )
+        // })
+    // }
   
 }

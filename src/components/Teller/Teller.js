@@ -99,6 +99,15 @@ class Teller extends Component {
         })
     }
 
+    deposit(amountInput) {
+        //this.state.member.acctnum is coming in on req.params... the object is coming in on req.body
+        axios.put(`/api/depositStepOne/${this.state.member.acctnum}`, {depositAmount: amountInput, balance: this.state.savingsOneBalance})
+        // this.setState({
+        //     savingsOneBalance: this.state.savingsOneBalance + amountInput
+        // })
+        // console.log(this.state)
+    }
+
     changeTellerForm(form) {
         this.setState({
             currentContentForm: form
@@ -125,12 +134,6 @@ class Teller extends Component {
         })
     }
 
-    deposit(amountInput) {
-        this.setState({
-            savingsOneBalance: this.state.savingsOneBalance + amountInput
-        })
-        console.log(this.state)
-    }
 
     render() {
 
