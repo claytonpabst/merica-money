@@ -9,6 +9,7 @@ import Transactions from './Forms/Transactions'
 import TransactionHistory from './Forms/TransactionHistory'
 import DeleteAccount from './Forms/DeleteAccount'
 import EndSession from './Forms/EndSession'
+import CreateNewMember from './Forms/CreateNewMember'
 
 class Teller extends Component {
     constructor(props) {
@@ -72,7 +73,7 @@ class Teller extends Component {
     }
 
     getMember(mem){
-        console.log(typeof mem)
+        console.log(mem)
         const num = typeof mem === 'number' ? mem : this.state.acctInput
         console.log(num)
 
@@ -123,6 +124,12 @@ class Teller extends Component {
         console.log(this.state.member.acctnum)
         //this.state.member.acctnum is coming in on req.params... the object is coming in on req.body
         axios.put(`/api/deposit/${this.state.member.acctnum}`, {depositAmount: amountInput})
+        .then( res => {
+            if ( res.data.length ) {
+                this.getMember()
+            }
+            console.log(res)
+        })
         // this.setState({
         //     savingsOneBalance: this.state.savingsOneBalance + amountInput
         // })
@@ -174,6 +181,8 @@ class Teller extends Component {
             contentFormToShow = <DeleteAccount />
         } else if (this.state.currentContentForm === 5) {
             contentFormToShow = <EndSession endSession={this.endSession}/>
+        } else if (this.state.currentContentForm === 6) {
+            contentFormToShow = <CreateNewMember />
         }
 
         return (
@@ -219,6 +228,7 @@ class Teller extends Component {
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(1)}>Search For Account</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(2)}>Transactions</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(3)}>Transaction History</div>
+                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(6)}>Create New Member</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(4)}>Delete Account</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(5)}>End Session</div>
                 </header>

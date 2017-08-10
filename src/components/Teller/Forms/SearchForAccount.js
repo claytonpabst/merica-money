@@ -23,10 +23,10 @@ class SearchForAccount extends Component {
 
     render() {
 
-        let searchList = 'Search Results:'
-        if(this.state.lastNameSearchResults.length > 0) {
-            searchList = this.state.lastNameSearchResults[0].acctnum
-        }
+        // let searchList = 'Search Results:'
+        // if(this.state.lastNameSearchResults.length > 0) {
+        //     searchList = this.state.lastNameSearchResults[0].acctnum
+        // }
 
 
         return (
