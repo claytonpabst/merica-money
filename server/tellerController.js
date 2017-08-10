@@ -38,14 +38,17 @@ module.exports = {
         })
     },
     
-    deposit: function(req, res, next){
+    deposit: function(req, res){
+        console.log(req.body, req.params)
         const db = req.app.get('db');
         // let sum = req.body.depositAmount + req.body.balance;
         let balance = 0.00
         db.getBalance([req.params.accountNumber])
-        .then( bal => {
+        .then( (bal, err) => {
+            console.log(err)
             if ( bal.length ) {
-                balance = bal + req.body.depositAmount;
+                balance = bal[0].balance + req.body.depositAmount;
+                console.log(balance)
                 db.deposit([req.params.accountNumber, balance])
                 .then ( results => {
                     console.log(results);

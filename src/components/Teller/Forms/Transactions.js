@@ -8,6 +8,7 @@ class Transactions extends Component {
             amountInput: 0
         }
         this.handleAmountInput = this.handleAmountInput.bind(this);
+        this.handleTransactionType = this.handleTransactionType.bind(this);
         //bind stuff here
     }
 
@@ -18,6 +19,10 @@ class Transactions extends Component {
         // console.log(this.state.amountInput)
     }
 
+    handleTransactionType(e) {
+        console.log(e.target.value)
+    }
+
     render() {
 
         return (
@@ -25,7 +30,7 @@ class Transactions extends Component {
 
                 <br/>
                 <h1>Transaction Type: </h1> 
-                <select name="transactionType" id='transactionType'>
+                <select name="transactionType" id='transactionType' onChange={this.handleTransactionType}>
                     <option value="deposit">Deposit</option>
                     <option value="withdrawal">Withdrawal</option>
                     {/*<option value="transfer">Transfer</option>*/}
@@ -36,7 +41,7 @@ class Transactions extends Component {
 
                 <h1>Account: </h1>
                 <select name="account" id='account'>
-                    <option value="saving1">Savings 1</option>
+                    <option value="savings1">Savings 1</option>
                     <option value="checking">Checking</option>
                 </select>
 

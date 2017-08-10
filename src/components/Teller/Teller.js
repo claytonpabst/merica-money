@@ -43,9 +43,11 @@ class Teller extends Component {
     }
 
     handleAcctInput(e){
-        this.setState({
-            acctInput: e.target.value
-        })
+        // if (Number.isInteger(e.target.value)) {
+            this.setState({
+                acctInput: e.target.value
+            })
+        // }
     }
 
     handleLastNameInput(e){
@@ -73,9 +75,10 @@ class Teller extends Component {
         console.log(typeof mem)
         const num = typeof mem === 'number' ? mem : this.state.acctInput
         console.log(num)
+
         axios.get(`/api/getMember/${num}`)
         .then( res => {
-            if (res.length) {
+            if (res.data.length) {
                 this.setState({
                     member: res.data[0],
                     currentContentForm: 2
@@ -83,9 +86,11 @@ class Teller extends Component {
             }
         // console.log(this.state.member)
         })
+    
         axios.get(`/api/getMembersAccounts/${num}`)
         .then( res => {
-            if (res.length) {
+            // console.log(res)
+            if (res.data.length) {
                 this.setState({
                     membersAccounts: res.data,
                     savingsOneAccountType: res.data[0].accounttype,
@@ -106,6 +111,8 @@ class Teller extends Component {
     }
 
     deposit(amountInput) {
+        console.log(amountInput)
+        console.log(this.state.member.acctnum)
         //this.state.member.acctnum is coming in on req.params... the object is coming in on req.body
         axios.put(`/api/deposit/${this.state.member.acctnum}`, {depositAmount: amountInput})
         // this.setState({
@@ -170,6 +177,7 @@ class Teller extends Component {
                                                 savingsOneBalance={this.state.savingsOneBalance}
                                                 >*/}
                         {/*<h1>{JSON.stringify(this.state.membersAccounts)}</h1>*/}
+                        {this.state.savingsOneAccountType}
                         <table className="accountsTable">
                             <tbody>
                                 <tr className="accountsRowOne">
