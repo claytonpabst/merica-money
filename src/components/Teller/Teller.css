@@ -68,11 +68,12 @@
     /*justify-content: center;*/
     align-items: center;
     /*opacity: .5;*/
+    padding-top: 8px;
 }
 
 .sideNavOptions {
     width: 90%;
-    height: 10%;
+    height: 12%;
     box-shadow: inset 15px -10px 35px 7px rgba(96,96,97,1);
     margin: 10px;
     display: flex;
@@ -82,6 +83,7 @@
     font-weight: bolder;
     font-size: 18px;
     transition: .3s;
+    padding-bottom: 5px;
 }
 
 .sideNavOptions:hover {

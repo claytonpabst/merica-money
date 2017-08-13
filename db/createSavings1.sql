@@ -1,0 +1,1 @@
+insert into memberAccounts (acctNum, accountType) values ($1, 'savings1')

@@ -15,6 +15,24 @@ module.exports = {
             res.status(200).send(response)
         })
         .catch( (err) => res.status(500).send(err))
-    }
+    },
 
+    createSavings1: function(req, res) {
+        console.log(req.params.accountNumber)
+        const db = req.app.get('db');
+        db.createSavings1([req.params.accountNumber])
+        .then( function(response) {
+            res.status(200).send(response)
+        })
+        .catch( (err) => res.status(500).send(err))
+    },
+
+    createChecking: function(req, res) {
+        const db = req.app.get('db');
+        db.createChecking([req.body.accountNumber])
+        .then( function(response) {
+            res.status(200).send(response)
+        })
+        .catch( (err) => res.status(500).send(err))
+    }
 }

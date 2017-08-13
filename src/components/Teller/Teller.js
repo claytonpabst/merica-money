@@ -107,7 +107,7 @@ class Teller extends Component {
                 this.setState({
                     membersAccounts: res.data,
                     savingsOneAccountType: res.data[0].accounttype,
-                    savingsOneBalance: res.data[0].balance,
+                    savingsOneBalance: res.data[0].balance.toFixed(2),
                     savingsOneAvailableBalance: res.data[0].availablebalance,
                     savingsOneDateOpened: res.data[0].opendate.substring(0, 10),
                 })
@@ -205,14 +205,14 @@ class Teller extends Component {
                                 </tr>
                                 <tr className="accountsRowTwo">
                                     <td>{this.state.savingsOneAccountType}</td>
-                                    <td>{this.state.savingsOneBalance}</td>
-                                    <td>{this.state.savingsOneAvailableBalance}</td>
+                                    <td>${this.state.savingsOneBalance}</td>
+                                    <td>${this.state.savingsOneAvailableBalance}</td>
                                     <td>{this.state.savingsOneDateOpened}</td>                                  
                                 </tr> 
                                 <tr className="accountsRowThree">
                                     <td>{this.state.checkingAccountType}</td>
-                                    <td>{this.state.checkingBalance}</td>
-                                    <td>{this.state.checkingAvailableBalance}</td>
+                                    <td>${this.state.checkingBalance}</td>
+                                    <td>${this.state.checkingAvailableBalance}</td>
                                     <td>{this.state.checkingDateOpened}</td>                                  
                                 </tr> 
                             </tbody>    

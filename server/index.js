@@ -85,6 +85,8 @@ const bankerController = require('./bankerController');
 
 //Banker Controls
 app.post('/api/createNewMember', bankerController.createNewMember);
+app.post('/api/createSavings1/:accountNumber', bankerController.createSavings1);
+app.post('/api/createChecking', bankerController.createChecking);
 //End of Banker controls
 
 
