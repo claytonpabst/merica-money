@@ -5,7 +5,7 @@ var massive = require('massive');
 // var passport = require('passport');
 var session = require('express-session');
 // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var config = require('../config.js');
+var config = require('./config.js');
 
 const app = module.exports = express();
 
