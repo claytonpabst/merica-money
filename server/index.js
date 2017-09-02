@@ -90,6 +90,6 @@ app.post('/api/createChecking', bankerController.createChecking);
 //End of Banker controls
 
 
-const port = 8000;
+const port = config.port;
 // app.listen(config.port, console.log("you are now connected on " + config.port));
 app.listen(port, console.log(`you are now connected on port ${port}`));
