@@ -227,7 +227,7 @@ class Teller extends Component {
                 <header className='tellerSideNav'>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(1)}>Search For Account</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(2)}>Transactions</div>
-                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(3)}>Transaction History</div>
+                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(3)}>Entertainment</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(6)}>Create New Member</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(4)}>Delete Account</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(5)}>End Session</div>

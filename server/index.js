@@ -6,6 +6,9 @@ var massive = require('massive');
 var session = require('express-session');
 // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var config = require('./config.js');
+// request and cheerio will let us scrape a loan site to recieve on the fly loan rates.
+let request = require('request');
+let cheerio = require('cheerio');
 
 const app = module.exports = express();
 
@@ -27,9 +30,50 @@ massive(config.connection)
   app.set('db', db);
 })
 
+//this function will fire when app starts up and update loan rates.... maybe....
+// getLoanRates()
 
-app.use(express.static(__dirname + './../build'))
+// function getLoanRates() {
+//     req = request.defaults({
+//         jar:true,
+//         rejectUnauthorized: false,
+//         followAllRedirects:true
+//     })
+//     req.get({
+//         url: 'https://www.bankrate.com',
+//         uri: 'https://www.bankrate.com',
+//         headers: {
+//             'User-Agent': 'Chrome/41.0.2228.0'
+//         }
+//     }, function(err, res, body) {
+        
+//         if (err) {
+//             console.log(err)
+//             return
+//         } else if (res.statusCode === 200) { 
+//             let $ = cheerio.load(body);
+//             console.log('hit', $('.homepage__rate-tab'))
 
+            // $('.homepage__rate-tab').each(function() {
+            //   let rates = []
+            //   let rate = 
+            //   console.log(rate)
+            // })
+
+            // $('a.s-access-detail-page', '#atfResults').each(function() {
+            //     info = $(this).attr('href');
+            //     productURLs.push(info)
+            // });
+            // $('a.pagnNext', '#bottomBar').each(function() {
+            //     relevantPath = $(this).attr('href');
+            //     console.log($(this).html())
+            //     let re = new RegExp('\/.*(\/.*)')
+            //     nextURL = 'https://www.amazon.com' + relevantPath.match(re)[1]
+            //     console.log(nextURL)
+            // });
+//         }
+//     })
+// }
 // var userController = require("./userController.js");
 
 /////////////Oauth functions
