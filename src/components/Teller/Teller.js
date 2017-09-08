@@ -97,7 +97,7 @@ class Teller extends Component {
             if (res.data.length) {
                 this.setState({
                     checkingAccountType: res.data[0].accounttype,
-                    checkingBalance: res.data[0].balance,
+                    checkingBalance: res.data[0].balance.toFixed(2),
                     checkingAvailableBalance: res.data[0].availablebalance,
                     checkingDateOpened: res.data[0].opendate.substring(0, 10)
                 })
@@ -137,7 +137,7 @@ class Teller extends Component {
         } else if (account === 'Checking' && transaction === 'Deposit') {
             this.checkingDeposit(cash)
         } else if (account === 'Checking' && transaction === 'Withdrawal') {
-            if(this.state.savingsOneBalance < cash){
+            if(this.state.checkingBalance < cash){
                 alert ('There are not enough funds in checking to complete this transaction')
                 return
             } else {

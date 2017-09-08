@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 // app.use(passport.initialize());
 // app.use(passport.session());
-app.use(express.static('build'));
+// app.use(express.static('build'));
 
 massive(config.connection)
 .then( db => {
@@ -137,6 +137,7 @@ app.post('/api/createSavings1/:accountNumber', bankerController.createSavings1);
 app.post('/api/createChecking', bankerController.createChecking);
 //End of Banker controls
 
+app.use(express.static(__dirname + '../build'))
 
 const port = config.port;
 // app.listen(config.port, console.log("you are now connected on " + config.port));
