@@ -11,7 +11,7 @@ import MbrHome from './components/Member/MbrHome/MbrHome.js'
 export default (
     <Switch>
         
-        <Route component={ Home } path='/' exact />
+        <Route component={ Teller } path='/' exact />
         <Route component={ Banker } path='/banker' exact />
         <Route component={ Teller } path='/teller' exact />
         {/*<Route component={ MbrHome } path='/member/home' exact />*/}

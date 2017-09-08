@@ -123,6 +123,9 @@ app.get('/api/getMembersAccountChecking/:acctInput', tellerController.getMembers
 app.get('/api/getMemberByLastName/:lastNameInput', tellerController.getMemberByLastName);
 
 app.put('/api/deposit/:accountNumber', tellerController.deposit);
+app.put('/api/savingsWithdrawal/:accountNumber', tellerController.savingsWithdrawal);
+app.put('/api/checkingDeposit/:accountNumber', tellerController.checkingDeposit);
+app.put('/api/checkingWithdrawal/:accountNumber', tellerController.checkingWithdrawal);
 // End of teller cntl
 
 const bankerController = require('./bankerController');

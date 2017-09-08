@@ -127,16 +127,22 @@ class Teller extends Component {
         console.log('hit', cash, account, transaction)
         if (account === 'Savings' && transaction === 'Deposit') {
             this.savingsDeposit(cash)
-            return
-        } else if (account === 'Savings' && transaction === 'Withdrawl') {
-            this.savingsWithdrawal(cash)
-            return
+        } else if (account === 'Savings' && transaction === 'Withdrawal') {
+            if(this.state.savingsOneBalance < cash){
+                alert ('There are not enough funds in savings to complete this transaction')
+                return
+            } else {
+                this.savingsWithdrawal(cash)
+            }
         } else if (account === 'Checking' && transaction === 'Deposit') {
             this.checkingDeposit(cash)
-            return
-        } else if (account === 'Checking' && transaction === 'Withdrawl') {
-            this.checkingWithdrawal(cash)
-            return
+        } else if (account === 'Checking' && transaction === 'Withdrawal') {
+            if(this.state.savingsOneBalance < cash){
+                alert ('There are not enough funds in checking to complete this transaction')
+                return
+            } else {
+                this.checkingWithdrawal(cash)
+            }
         }
     }
 
@@ -147,7 +153,7 @@ class Teller extends Component {
         axios.put(`/api/deposit/${this.state.member.acctnum}`, {depositAmount: amountInput})
         .then( res => {
             if ( res.data.length ) {
-                this.getMember()
+                this.getMember(this.state.member.acctnum)
             }
             console.log(res)
         })
@@ -161,7 +167,7 @@ class Teller extends Component {
         axios.put(`/api/savingsWithdrawal/${this.state.member.acctnum}`, {depositAmount: amountInput})
         .then( res => {
             if (res.data.length ) {
-                this.getMember()
+                this.getMember(this.state.member.acctnum)
             }
         })
     }
@@ -169,7 +175,7 @@ class Teller extends Component {
         axios.put(`/api/checkingDeposit/${this.state.member.acctnum}`, {depositAmount: amountInput})
         .then( res => {
             if (res.data.length ) {
-                this.getMember()
+                this.getMember(this.state.member.acctnum)
             }
         })
     }
@@ -177,7 +183,7 @@ class Teller extends Component {
         axios.put(`/api/checkingWithdrawal/${this.state.member.acctnum}`, {depositAmount: amountInput})
         .then( res => {
             if (res.data.length ) {
-                this.getMember()
+                this.getMember(this.state.member.acctnum)
             }
         })
     }
@@ -258,7 +264,7 @@ class Teller extends Component {
                                 <tr className="accountsRowThree">
                                     <td>{this.state.checkingAccountType}</td>
                                     <td>${this.state.checkingBalance}</td>
-                                    <td>${this.state.checkingAvailableBalance}</td>
+                                    <td>${this.state.checkingBalance}</td>
                                     <td>{this.state.checkingDateOpened}</td>                                  
                                 </tr> 
                             </tbody>    

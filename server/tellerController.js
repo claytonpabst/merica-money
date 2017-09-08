@@ -65,6 +65,54 @@ module.exports = {
                 })
             }
         })
+    },
+
+    checkingDeposit: function(req, res){
+        const db = req.app.get('db');
+        let balance = 0.00
+        db.getCheckingBalance([req.params.accountNumber])
+        .then( (bal, err) => {
+            if (bal.length) {
+                balance = bal[0].balance + req.body.depositAmount;
+                db.checkingDeposit([req.params.accountNumber, balance])
+                .then ( results => {
+                    return res.status(200).send( results ) 
+                })
+            }
+        })
+    },
+    savingsWithdrawal: function(req, res){
+        console.log(req.body, req.params)
+        const db = req.app.get('db');
+        // let sum = req.body.depositAmount + req.body.balance;
+        let balance = 0.00
+        db.getBalance([req.params.accountNumber])
+        .then( (bal, err) => {
+            console.log(err)
+            if ( bal.length ) {
+                balance = bal[0].balance - req.body.depositAmount;
+                console.log(balance)
+                db.deposit([req.params.accountNumber, balance])
+                .then ( results => {
+                    console.log(results);
+                    return res.status(200).send( results )
+                })
+            }
+        })
+    },
+    checkingWithdrawal: function(req, res){
+        const db = req.app.get('db');
+        let balance = 0.00
+        db.getCheckingBalance([req.params.accountNumber])
+        .then( (bal, err) => {
+            if (bal.length) {
+                balance = bal[0].balance - req.body.depositAmount;
+                db.checkingDeposit([req.params.accountNumber, balance])
+                .then ( results => {
+                    return res.status(200).send( results ) 
+                })
+            }
+        })
     }
 
     // deposit: function(req, res){
