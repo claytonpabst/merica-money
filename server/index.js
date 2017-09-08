@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 
 // app.use(passport.initialize());
 // app.use(passport.session());
+app.use(express.static('build'));
 
 massive(config.connection)
 .then( db => {
