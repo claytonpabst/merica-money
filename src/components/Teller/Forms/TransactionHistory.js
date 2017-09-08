@@ -31,6 +31,8 @@ class TransactionHistory extends Component {
 
         return (
             <section>
+                <h1>It looks like Transaction History hasn't been built out yet,</h1>
+                <h1>here's a giphy to look at while you wait.</h1>
                 <iframe className='gif' src={ this.state.gifToDisplay }></iframe>
             </section>
         )

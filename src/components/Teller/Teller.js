@@ -39,7 +39,11 @@ class Teller extends Component {
         this.handleLastNameInput = this.handleLastNameInput.bind(this);
         this.changeTellerForm = this.changeTellerForm.bind(this);
         this.endSession = this.endSession.bind(this);
-        this.deposit = this.deposit.bind(this);
+        this.savingsDeposit = this.savingsDeposit.bind(this);
+        this.savingsWithdrawal = this.savingsWithdrawal.bind(this);
+        this.checkingDeposit = this.checkingDeposit.bind(this);
+        this.checkingWithdrawal = this.checkingWithdrawal.bind(this);
+        this.checkTransactionPlacement = this.checkTransactionPlacement.bind(this);
 
     }
 
@@ -119,7 +123,24 @@ class Teller extends Component {
         })
     }
 
-    deposit(amountInput) {
+    checkTransactionPlacement(cash, account, transaction){
+        console.log('hit', cash, account, transaction)
+        if (account === 'Savings' && transaction === 'Deposit') {
+            this.savingsDeposit(cash)
+            return
+        } else if (account === 'Savings' && transaction === 'Withdrawl') {
+            this.savingsWithdrawal(cash)
+            return
+        } else if (account === 'Checking' && transaction === 'Deposit') {
+            this.checkingDeposit(cash)
+            return
+        } else if (account === 'Checking' && transaction === 'Withdrawl') {
+            this.checkingWithdrawal(cash)
+            return
+        }
+    }
+
+    savingsDeposit(amountInput) {
         console.log(amountInput)
         console.log(this.state.member.acctnum)
         //this.state.member.acctnum is coming in on req.params... the object is coming in on req.body
@@ -134,6 +155,31 @@ class Teller extends Component {
         //     savingsOneBalance: this.state.savingsOneBalance + amountInput
         // })
         // console.log(this.state)
+    }
+
+    savingsWithdrawal(amountInput) {
+        axios.put(`/api/savingsWithdrawal/${this.state.member.acctnum}`, {depositAmount: amountInput})
+        .then( res => {
+            if (res.data.length ) {
+                this.getMember()
+            }
+        })
+    }
+    checkingDeposit(amountInput) {
+        axios.put(`/api/checkingDeposit/${this.state.member.acctnum}`, {depositAmount: amountInput})
+        .then( res => {
+            if (res.data.length ) {
+                this.getMember()
+            }
+        })
+    }
+    checkingWithdrawal(amountInput) {
+        axios.put(`/api/checkingWithdrawal/${this.state.member.acctnum}`, {depositAmount: amountInput})
+        .then( res => {
+            if (res.data.length ) {
+                this.getMember()
+            }
+        })
     }
 
     changeTellerForm(form) {
@@ -174,7 +220,7 @@ class Teller extends Component {
                                                   lastNameInput={this.state.lastNameInput}
                                                   />
         } else if (this.state.currentContentForm === 2) {
-            contentFormToShow = <Transactions deposit={this.deposit}/>
+            contentFormToShow = <Transactions checkTransactionPlacement={this.checkTransactionPlacement}/>
         } else if (this.state.currentContentForm === 3) {
             contentFormToShow = <TransactionHistory />
         } else if (this.state.currentContentForm === 4) {
@@ -206,7 +252,7 @@ class Teller extends Component {
                                 <tr className="accountsRowTwo">
                                     <td>{this.state.savingsOneAccountType}</td>
                                     <td>${this.state.savingsOneBalance}</td>
-                                    <td>${this.state.savingsOneAvailableBalance}</td>
+                                    <td>${this.state.savingsOneBalance}</td>
                                     <td>{this.state.savingsOneDateOpened}</td>                                  
                                 </tr> 
                                 <tr className="accountsRowThree">
@@ -227,7 +273,7 @@ class Teller extends Component {
                 <header className='tellerSideNav'>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(1)}>Search For Account</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(2)}>Transactions</div>
-                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(3)}>Entertainment</div>
+                    <div className='sideNavOptions' onClick={ () => this.changeTellerForm(3)}>Transaction History</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(6)}>Create New Member</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(4)}>Delete Account</div>
                     <div className='sideNavOptions' onClick={ () => this.changeTellerForm(5)}>End Session</div>
